@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تحليل تذاكر الدعم الفني لنظام تقاضي - المنطقة الشرقية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Tajawal', sans-serif;
+        background-color: #f0f4f8;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 40vh;
+        max-height: 450px;
+      }
+      .horizontal-chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 70vh;
+        max-height: 700px;
+      }
+      .kpi-card {
+        background: #004aad;
+        color: white;
+      }
+      .flow-step {
+        border-color: #0073e6;
+      }
+      .flow-arrow {
+        color: #0073e6;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-800">
+    <header class="bg-white shadow-md p-6 text-center">
+      <h1 class="text-4xl font-extrabold text-[#004AAD]">
+        تحليل تذاكر الدعم الفني لنظام تقاضي
+      </h1>
+      <p class="text-lg text-gray-600 mt-2">
+        تفصيل شامل لبيانات التذاكر في محاكم الشرقية
+      </p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center mb-12">
+        <div
+          class="kpi-card rounded-xl shadow-lg p-6 md:p-8 flex flex-col justify-center items-center"
+        >
+          <p class="text-2xl font-bold">إجمالي عدد التذاكر في الشرقية</p>
+          <p class="text-6xl md:text-7xl font-extrabold mt-2">354</p>
+        </div>
+        <div
+          class="kpi-card rounded-xl shadow-lg p-6 md:p-8 flex flex-col justify-center items-center"
+        >
+          <p class="text-2xl font-bold">متوسط المدة الزمنية المنقضية (يوم)</p>
+          <p class="text-6xl md:text-7xl font-extrabold mt-2">94.26</p>
+        </div>
+      </section>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2">
+          <h2 class="text-2xl font-bold text-[#004AAD] mb-2 text-center">
+            أكثر المحاكم رفعًا للتذاكر
+          </h2>
+          <p class="text-center text-gray-600 mb-6">
+            يوضح هذا التحليل أكثر 6 محاكم تساهم بأكبر عدد من تذاكر الدعم في
+            المنطقة الشرقية.
+          </p>
+          <div class="horizontal-chart-container">
+            <canvas id="topCourtsChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-2xl font-bold text-[#004AAD] mb-2 text-center">
+            توزيع التذاكر على المجموعات
+          </h2>
+          <p class="text-center text-gray-600 mb-6">
+            يُظهر هذا المخطط توزيع التذاكر التي تم إسنادها إلى فرق ومجموعات
+            الدعم المختلفة، مما يساعد في تقييم توزيع المهام.
+          </p>
+          <div class="chart-container">
+            <canvas id="assignedGroupChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-2xl font-bold text-[#004AAD] mb-2 text-center">
+            أكثر المشاكل شيوعًا
+          </h2>
+          <p class="text-center text-gray-600 mb-6">
+            يوضح هذا المخطط الفئات الفرعية الأكثر تكرارًا في تذاكر الدعم.
+          </p>
+          <div class="horizontal-chart-container" style="height: 50vh">
+            <canvas id="topCategoriesChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2">
+          <h2 class="text-2xl font-bold text-[#004AAD] mb-2 text-center">
+            مقترحات لتحسين الأداء
+          </h2>
+          <p class="text-center text-gray-600 mb-6">
+            بناءً على النتائج، يمكن تطبيق هذه المقترحات لزيادةالكفائة.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              class="flex items-start bg-blue-50 p-4 rounded-lg shadow-inner"
+            >
+              <div class="text-4xl text-[#004AAD] mr-4">💡</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">توفير الدعم المخصص</h3>
+                <p class="text-sm text-gray-700">
+                  توفير فريق دعم مخصص للمحاكم التي ترفع أكبر عدد من التذاكر،
+                  لضمان استجابة سريعة وفعالة لمشاكلهم المتكررة.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-start bg-blue-50 p-4 rounded-lg shadow-inner"
+            >
+              <div class="text-4xl text-[#004AAD] mr-4">📚</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">توجيه التدريب</h3>
+                <p class="text-sm text-gray-700">
+                  تنظيم ورش عمل تدريبية مكثفة حول أكثر الفئات شيوعًا، مثل
+                  "الصكوك" و "الجلسات"، لتمكين الموظفين من حل هذه المشاكل بشكل
+                  أسرع.
+                </p>
+              </div>
+            </div>
+            <div
+              class="flex items-start bg-blue-50 p-4 rounded-lg shadow-inner md:col-span-2"
+            >
+              <div class="text-4xl text-[#004AAD] mr-4">🚫</div>
+              <div>
+                <h3 class="font-bold text-lg mb-1">
+                  ملاحظة بشأن المحاكم المستثناة من التحليل
+                </h3>
+                <p class="text-sm text-gray-700">
+                  تم استثناء تذاكر المحاكم العمالية والتجارية بالدمام من هذا
+                  التحليل، لكونها لا يمكن تصدير بياناتها من نظام الدعم لعدم وجود
+                  فلترة متاحة.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center p-6 mt-8 text-gray-500 text-sm">
+      <p>تم إنشاء هذا التحليل بتاريخ 9 سبتمبر 2025.</p>
+      <p>محمد فهد التويجري</p>
+    </footer>
+
+    <script>
+      const defaultTooltip = {
+        callbacks: {
+          title: function (tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+          },
+        },
+      };
+
+      function wrapLabels(label) {
+        const maxLength = 25;
+        if (typeof label === 'string' && label.length > maxLength) {
+          const words = label.split(' ');
+          const lines = [];
+          let currentLine = '';
+          words.forEach((word) => {
+            if ((currentLine + word).length > maxLength) {
+              lines.push(currentLine.trim());
+              currentLine = '';
+            }
+            currentLine += word + ' ';
+          });
+          lines.push(currentLine.trim());
+          return lines;
+        }
+        return label;
+      }
+
+      const topCourts = {
+        'محكمة الاستئناف بالمنطقة الشرقيّة': 94,
+        'المحكمة الجزائيّة بالدمام': 72,
+        'المحكمة العامة بالدمام': 41,
+        'محكمة الأحوال الشخصية بالدمام': 36,
+        'المحكمة العامة بالخبر': 23,
+        'المحكمة العامة بالجبيل': 18,
+      };
+      const topIssues = {
+        'الطلبات على القضية': 60,
+        الجلسات: 52,
+        الصكوك: 50,
+        القرارات: 41,
+        'القضية\xa0': 25,
+        'Applications for the case': 19,
+        الضبوط: 15,
+        'حالة القضية': 14,
+        'بيانات القضية': 13,
+        المواعيد: 11,
+      };
+      const assignedGroups = {
+        'نظام تقاضي - المستوى الثالث': 162,
+        'نظام تقاضي – التطوير': 102,
+        'نظام تقاضي - المستوى الثاني': 51,
+        'نظام تقاضي – نقل البيانات Migration': 32,
+        'نظام تقاضي – أطراف الدعوى': 3,
+        'الاسناد القضائي- المستوى الثاني': 3,
+        'الدعم الفني للإسناد القضائي': 1,
+      };
+
+      const topCourtsCtx = document
+        .getElementById('topCourtsChart')
+        .getContext('2d');
+      new Chart(topCourtsCtx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(topCourts).map(wrapLabels),
+          datasets: [
+            {
+              label: 'عدد التذاكر',
+              data: Object.values(topCourts),
+              backgroundColor: '#56A5EC',
+              borderColor: '#0073E6',
+              borderWidth: 1,
+              borderRadius: 5,
+            },
+          ],
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'عدد التذاكر',
+              },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: defaultTooltip,
+          },
+        },
+      });
+
+      const topCategoriesCtx = document
+        .getElementById('topCategoriesChart')
+        .getContext('2d');
+      new Chart(topCategoriesCtx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(topIssues).map(wrapLabels),
+          datasets: [
+            {
+              label: 'عدد التذاكر',
+              data: Object.values(topIssues),
+              backgroundColor: '#56A5EC',
+              borderColor: '#0073E6',
+              borderWidth: 1,
+              borderRadius: 5,
+            },
+          ],
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'عدد التذاكر',
+              },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: defaultTooltip,
+          },
+        },
+      });
+
+      const assignedGroupsCtx = document
+        .getElementById('assignedGroupChart')
+        .getContext('2d');
+      new Chart(assignedGroupsCtx, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(assignedGroups).map(wrapLabels),
+          datasets: [
+            {
+              label: 'نسبة التذاكر',
+              data: Object.values(assignedGroups),
+              backgroundColor: [
+                '#56A5EC',
+                '#0073E6',
+                '#004AAD',
+                '#A0D0EF',
+                '#42566A',
+                '#42566A',
+                '#004AAD',
+              ],
+              hoverOffset: 4,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+            },
+            tooltip: defaultTooltip,
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
